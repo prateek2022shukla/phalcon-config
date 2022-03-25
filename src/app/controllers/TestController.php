@@ -8,7 +8,7 @@ class TestController extends Controller
     public function checkconfigAction()
     {
         $config = $this->di->get("config");
-        $this->view->appname = $config->get("app")->get("dbname");
+        $this->view->app = $config->get("app");
 
         
         

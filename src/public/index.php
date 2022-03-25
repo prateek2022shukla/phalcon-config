@@ -64,23 +64,6 @@ $container->set(
 
 $application = new Application($container);
 
-
-
-$container->set(
-    'db',
-    function () {
-        return new Mysql(
-            [
-                'host'     => 'mysql-server',
-                'username' => 'root',
-                'password' => 'secret',
-                'dbname'   => $config->get("app")->get("dbname"),
-                ]
-        );
-    }
-);
-
-
 $container->set(
     'config',
     function () {
@@ -95,6 +78,24 @@ $container->set(
     },
     true
 );
+
+
+$container->set(
+    'db',
+    function () {       
+        return new Mysql(
+            [
+                'host'     => $this['config']['app']['dbhost'],
+                'username' => $this['config']['app']['dbusername'],
+                'password' => $this['config']['app']['dbpassword'],
+                'dbname'   => $this['config']['app']['dbname'],
+                ]
+        );
+    }
+);
+
+
+
 
 
 $container->set(
